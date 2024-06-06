@@ -267,6 +267,7 @@ def main():
     args = parse_args() 
     
     args.do_sample = False 
+    args.griffin = True 
     
     transformers.logging.set_verbosity_error()
     datasets.logging.set_verbosity_error()
