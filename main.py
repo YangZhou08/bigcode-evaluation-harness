@@ -244,11 +244,11 @@ def parse_args():
         default = 16, 
         type = int, 
     ) 
-    parser.add_argument( 
-        "--do_sample", 
-        default = True, 
-        type = bool, 
-    ) 
+    # parser.add_argument( 
+    #     "--do_sample", 
+    #     default = True, 
+    #     type = bool, 
+    # ) 
     return parser.parse_args()
 
 
@@ -269,7 +269,10 @@ def get_gpus_max_memory(max_memory, num_gpus):
 
 
 def main():
-    args = parse_args()
+    args = parse_args() 
+    
+    args.do_sample = False 
+    
     transformers.logging.set_verbosity_error()
     datasets.logging.set_verbosity_error()
 
