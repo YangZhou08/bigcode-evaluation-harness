@@ -219,7 +219,7 @@ def parse_args():
     parser.add_argument(
         "--cats", 
         default = True, 
-        dtype = bool, 
+        type = bool, 
     ) 
     parser.add_argument(
         "--spr", 
