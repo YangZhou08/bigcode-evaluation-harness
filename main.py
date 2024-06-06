@@ -214,15 +214,11 @@ def parse_args():
     ) 
     parser.add_argument( 
         "--griffin", 
-        default = False, 
-        type = bool, 
-        required = False, 
+        action = "store_true", 
     ) 
     parser.add_argument(
         "--cats", 
-        default = False, 
-        type = bool, 
-        required = False, 
+        action = "store_true", 
     ) 
     parser.add_argument(
         "--spr", 
@@ -236,8 +232,7 @@ def parse_args():
     ) 
     parser.add_argument(
         "--check", 
-        default = False, 
-        type = bool, 
+        action = "store_true", 
     ) 
     parser.add_argument( 
         "--kernelsize", 
