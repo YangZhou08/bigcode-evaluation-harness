@@ -218,7 +218,8 @@ def parse_args():
     ) 
     parser.add_argument(
         "--cats", 
-        action = "store_true", 
+        default = True, 
+        dtype = bool, 
     ) 
     parser.add_argument(
         "--spr", 
@@ -267,7 +268,6 @@ def main():
     args = parse_args() 
     
     args.do_sample = False 
-    args.griffin = True 
     
     transformers.logging.set_verbosity_error()
     datasets.logging.set_verbosity_error()
