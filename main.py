@@ -16,7 +16,9 @@ from transformers import (
 
 from bigcode_eval.arguments import EvalArguments
 from bigcode_eval.evaluator import Evaluator
-from bigcode_eval.tasks import ALL_TASKS
+from bigcode_eval.tasks import ALL_TASKS 
+
+from llama10 import get_llama_griffin, get_llama_griffin2, LlamaForCausalLM 
 
 
 class MultiChoice:
@@ -209,7 +211,44 @@ def parse_args():
         "--check_references",
         action="store_true",
         help="Don't run generation but benchmark groundtruth (useful for debugging)",
-    )
+    ) 
+    parser.add_argument( 
+        "--griffin", 
+        default = False, 
+        type = bool, 
+        required = False, 
+    ) 
+    parser.add_argument(
+        "--cats", 
+        default = False, 
+        type = bool, 
+        required = False, 
+    ) 
+    parser.add_argument(
+        "--spr", 
+        default = 0.5, 
+        type = float, 
+    ) 
+    parser.add_argument( 
+        "--thr", 
+        default = 0.1, 
+        type = float, 
+    ) 
+    parser.add_argument(
+        "--check", 
+        default = False, 
+        type = bool, 
+    ) 
+    parser.add_argument( 
+        "--kernelsize", 
+        default = 16, 
+        type = int, 
+    ) 
+    parser.add_argument( 
+        "--do_sample", 
+        default = True, 
+        type = bool, 
+    ) 
     return parser.parse_args()
 
 
@@ -293,10 +332,35 @@ def main():
                     print("Loading model in auto mode")
 
         if args.modeltype == "causal":
-            model = AutoModelForCausalLM.from_pretrained(
-                args.model,
-                **model_kwargs,
-            )
+            # model = AutoModelForCausalLM.from_pretrained(
+            #     args.model,
+            #     **model_kwargs,
+            # ) 
+            assert not (args.griffin and args.cats), "Cannot use both griffin and cats" 
+            model = LlamaForCausalLM.from_pretrained(
+                args.model, 
+                **model_kwargs, 
+            ) 
+            if args.griffin: 
+                # schedule_k = [spr for _ in range(self._model.config.num_hidden_layers)] 
+                schedule_k = [args.spr for _ in range(model.config.num_hidden_layers)] 
+            if args.cats: 
+                # schedule_k = [(1 - spr) for _ in range(self._model.config.num_hidden_layers)] 
+                schedule_k = [(1 - args.spr) for _ in range(model.config.num_hidden_layers)] 
+            
+            model.config.mode = "gen" 
+            model.config.selection_method = "topk" 
+            model.config.check = args.check 
+            model.config.griffin = args.griffin 
+            model.config.kernelsize = args.kernelsize 
+            model.config.T = 0.6 
+            model.config.thr = args.thr 
+            
+            if args.griffin: 
+                model = get_llama_griffin2(model, schedule_k) 
+            if args.cats: 
+                model = get_llama_griffin(model, schedule_k) 
+            
         elif args.modeltype == "seq2seq":
             warnings.warn(
                 "Seq2Seq models have only been tested for HumanEvalPack & CodeT5+ models."
