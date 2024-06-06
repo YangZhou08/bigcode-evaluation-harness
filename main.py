@@ -355,7 +355,7 @@ def main():
             model.config.selection_method = "topk" 
             model.config.check = args.check 
             model.config.griffin = args.griffin 
-            model.config.kernelsize = args.kernelsize 
+            model.config.kernel_size = args.kernelsize 
             model.config.T = 0.6 
             model.config.thr = args.thr 
             
