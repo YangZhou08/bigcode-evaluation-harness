@@ -266,7 +266,7 @@ def get_gpus_max_memory(max_memory, num_gpus):
 
 def main():
     args = parse_args() 
-    
+    print(args) 
     args.do_sample = False 
     
     transformers.logging.set_verbosity_error()
