@@ -213,11 +213,11 @@ def parse_args():
         help="Don't run generation but benchmark groundtruth (useful for debugging)",
     ) 
     parser.add_argument( 
-        "--cats", 
+        "--griffin", 
         action = "store_true", 
     ) 
     parser.add_argument(
-        "--griffin", 
+        "--cats", 
         default = True, 
         type = bool, 
     ) 
