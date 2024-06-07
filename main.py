@@ -474,8 +474,8 @@ def main():
             f.write(dumped) 
     
     if args.check: 
-        total_step = model.total_step 
-        num_step = model.num_step 
+        total_step = model.total_steps  
+        num_step = model.num_steps  
         
         print(total_step, num_step, total_step / num_step) 
 
