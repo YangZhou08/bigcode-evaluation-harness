@@ -471,8 +471,14 @@ def main():
             print(dumped)
 
         with open(args.metric_output_path, "w") as f:
-            f.write(dumped)
+            f.write(dumped) 
+    
+    if args.check: 
+        total_step = model.total_step 
+        num_step = model.num_step 
+        
+        print(total_step, num_step, total_step / num_step) 
 
 
 if __name__ == "__main__":
-    main()
+    main() 
