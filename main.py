@@ -214,11 +214,12 @@ def parse_args():
     ) 
     parser.add_argument( 
         "--griffin", 
+        default = True, 
         action = "store_true", 
     ) 
     parser.add_argument(
         "--cats", 
-        default = True, 
+        default = False, 
         type = bool, 
     ) 
     parser.add_argument(
