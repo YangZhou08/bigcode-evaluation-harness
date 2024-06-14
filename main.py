@@ -218,7 +218,7 @@ def parse_args():
     ) 
     parser.add_argument(
         "--cats", 
-        default = False, 
+        default = True, 
         type = bool, 
     ) 
     parser.add_argument(
