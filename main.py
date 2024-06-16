@@ -214,7 +214,7 @@ def parse_args():
     ) 
     parser.add_argument( 
         "--griffin", 
-        default = True, 
+        default = False, 
         action = "store_true", 
     ) 
     parser.add_argument(
