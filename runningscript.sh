@@ -1,5 +1,6 @@
 accelerate launch --num_processes 8 main.py \
   --model meta-llama/Meta-Llama-3-8B-Instruct \
+  --limit 50 \
   --tasks mbpp \
   --do_sample False \
   --n_samples 1 \
@@ -9,6 +10,7 @@ accelerate launch --num_processes 8 main.py \
 
 accelerate launch --num_processes 8 main.py \
   --model meta-llama/Meta-Llama-3-8B \
+  --limit 50 \
   --tasks mbpp \
   --do_sample False \
   --n_samples 1 \
