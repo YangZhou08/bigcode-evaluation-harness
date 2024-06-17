@@ -854,6 +854,9 @@ class LlamaForCausalLM(LlamaPreTrainedModel):
         self.total_steps = 0
         self.num_steps = 0
         self.num_sentence = 0 
+        self.totalgenerationlength = 0 
+        self.total_roll_back_length_error = 0 
+        self.errorinstance = 0 
         self.verbose = False # manually set to false during measurement 
         
         # for bug debugging investigation only 
@@ -882,6 +885,13 @@ class LlamaForCausalLM(LlamaPreTrainedModel):
     def get_decoder(self):
         return self.model
 
+    def updatestatistic(self): 
+        self.num_steps = 0 
+        self.num_sentence = 0 
+        self.total_steps = 0 
+        self.totalgenerationlength = 0 
+        self.total_roll_back_length_error = 0 
+        self.errorinstance = 0 
 
     def forward(
         self,
@@ -1235,6 +1245,9 @@ class LlamaForCausalLM(LlamaPreTrainedModel):
         last_input_ids_print_pos = initial_len # this variable is for visualization 
         outputs = None 
         
+        self.num_sentence += 1 
+        assert input_ids.shape[0] == 1 
+        
         # TODO the main while loop 
         while True: 
             model_inputs = self.prepare_inputs_for_generation(input_ids, **model_kwargs) 
@@ -1339,7 +1352,9 @@ class LlamaForCausalLM(LlamaPreTrainedModel):
                     last_check = input_ids.shape[1] 
                     self.num_steps += 1 
                     self.total_steps += lengthaccepts + 1 
-                    
+                    if lengthaccepts != checklength - 1: 
+                        self.errorinstance += 1 
+                        self.total_roll_back_length_error += (checklength - 1 - lengthaccepts) 
                     if step == 0: # although not needed every time, good to have here 
                         approve_quit = True 
                 
@@ -1439,6 +1454,8 @@ class LlamaForCausalLM(LlamaPreTrainedModel):
         
         if streamer is not None:
             streamer.end()
+        
+        self.totalgenerationlength += input_ids.shape[1] - initial_len 
 
         if return_dict_in_generate:
             if self.config.is_encoder_decoder:

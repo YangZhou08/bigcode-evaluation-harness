@@ -7,7 +7,10 @@ from typing import List
 
 
 from bigcode_eval import tasks
-from bigcode_eval.generation import parallel_generations
+from bigcode_eval.generation import parallel_generations 
+import torch 
+import torch.distributed as dist 
+from tabulate import tabulate 
 
 _WARNING = """
 ################################################################################
@@ -78,7 +81,46 @@ class Evaluator:
             save_every_k_tasks=self.args.save_every_k_tasks,
             intermediate_generations=curr_generations,
             intermediate_save_generations_path=intermediate_save_generations_path,
-        )
+        ) 
+        print("type of model {}".format(type(self.model))) 
+        
+        headers = [] 
+        data = [] 
+        num_sentence = self.model.num_sentence 
+        totalgenerationlength = self.model.totalgenerationlength 
+        averagegenerationlength = totalgenerationlength / num_sentence 
+        numsentences = torch.tensor([num_sentence, totalgenerationlength], device = self.device) 
+        dist.all_reduce(numsentences, op = dist.ReduceOp.SUM) 
+        num_sentence = numsentences[0].item() 
+        totalgenerationlength = numsentences[1].item() 
+        averagegenerationlength = totalgenerationlength / num_sentence 
+        headers += ["Num Sentence", "Total Generation Length", "Average Generation Length"] 
+        data += [num_sentence, totalgenerationlength, averagegenerationlength] 
+        if self.model.config.check: 
+            total_step = self.model.total_steps 
+            num_step = self.model.num_steps 
+            totalsteps = torch.tensor([total_step, num_step], device = self.device) 
+            dist.all_reduce(totalsteps, op = dist.ReduceOp.SUM) 
+            total_step = totalsteps[0].item() 
+            num_step = totalsteps[1].item() 
+            aal = total_step / num_step 
+            headers += ["Total Steps", "Num Steps", "AAL"] 
+            data += [total_step, num_step, aal] 
+            # total_roll_back_length_error = self._model.total_roll_back_length_error 
+            total_roll_back_length_error = self.model.total_roll_back_length_error 
+            # errorinstance = self._model.errorinstance 
+            errorinstance = self.model.errorinstance 
+            totalrollbacklengtherrors = torch.tensor([total_roll_back_length_error, errorinstance], device = self.device) 
+            dist.all_reduce(totalrollbacklengtherrors, op = dist.ReduceOp.SUM) 
+            total_roll_back_length_error = totalrollbacklengtherrors[0].item() 
+            errorinstance = totalrollbacklengtherrors[1].item() 
+            averagerollbacklengtherror = total_roll_back_length_error / errorinstance 
+            headers += ["Total Roll Back Length Error", "Error Instance", "Average Roll Back Length Error"] 
+            data += [total_roll_back_length_error, errorinstance, averagerollbacklengtherror] 
+        if self.accelerator.is_main_process: 
+            print(tabulate([data], headers=headers, tablefmt="grid")) 
+        # self._model.updatestatistic() 
+        self.model.updatestatistic() 
 
         if len(generations[0]) > self.args.n_samples:
             generations = [l[: self.args.n_samples] for l in generations]
