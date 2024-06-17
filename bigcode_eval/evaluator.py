@@ -89,7 +89,7 @@ class Evaluator:
         num_sentence = self.model.num_sentence 
         totalgenerationlength = self.model.totalgenerationlength 
         averagegenerationlength = totalgenerationlength / num_sentence 
-        numsentences = torch.tensor([num_sentence, totalgenerationlength], device = self.device) 
+        numsentences = torch.tensor([num_sentence, totalgenerationlength], device = self.model.device) 
         dist.all_reduce(numsentences, op = dist.ReduceOp.SUM) 
         num_sentence = numsentences[0].item() 
         totalgenerationlength = numsentences[1].item() 
@@ -99,7 +99,7 @@ class Evaluator:
         if self.model.config.check: 
             total_step = self.model.total_steps 
             num_step = self.model.num_steps 
-            totalsteps = torch.tensor([total_step, num_step], device = self.device) 
+            totalsteps = torch.tensor([total_step, num_step], device = self.model.device) 
             dist.all_reduce(totalsteps, op = dist.ReduceOp.SUM) 
             total_step = totalsteps[0].item() 
             num_step = totalsteps[1].item() 
@@ -110,7 +110,7 @@ class Evaluator:
             total_roll_back_length_error = self.model.total_roll_back_length_error 
             # errorinstance = self._model.errorinstance 
             errorinstance = self.model.errorinstance 
-            totalrollbacklengtherrors = torch.tensor([total_roll_back_length_error, errorinstance], device = self.device) 
+            totalrollbacklengtherrors = torch.tensor([total_roll_back_length_error, errorinstance], device = self.model.device) 
             dist.all_reduce(totalrollbacklengtherrors, op = dist.ReduceOp.SUM) 
             total_roll_back_length_error = totalrollbacklengtherrors[0].item() 
             errorinstance = totalrollbacklengtherrors[1].item() 
