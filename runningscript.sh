@@ -1,4 +1,4 @@
-accelerate launch --num_processes 8 main.py \
+accelerate launch --num_processes 4 main.py \
   --model meta-llama/Meta-Llama-3-8B-Instruct \
   --limit 50 \
   --tasks mbpp \
@@ -8,7 +8,7 @@ accelerate launch --num_processes 8 main.py \
   --max_length_generation 2048 \
   --allow_code_execution
 
-accelerate launch --num_processes 8 main.py \
+accelerate launch --num_processes 4 main.py \
   --model meta-llama/Meta-Llama-3-8B \
   --limit 50 \
   --tasks mbpp \
