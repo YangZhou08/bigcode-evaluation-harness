@@ -6,6 +6,7 @@ accelerate launch --num_processes 2 main.py \
   --n_samples 1 \
   --batch_size 1 \
   --griffin \
+  --check \
   --max_length_generation 2048 \
   --allow_code_execution
 
