@@ -1441,7 +1441,7 @@ class LlamaForCausalLM(LlamaPreTrainedModel):
                 ''' 
             else: 
                 this_peer_finished = False 
-                if next_tokens.eq(eos_token_id_tensor[0]): 
+                if self.config.enable_epatches and next_tokens.eq(eos_token_id_tensor[0]): 
                     this_peer_finished = True 
 
             # print("stopping_criteria {}".format(stopping_criteria)) 
