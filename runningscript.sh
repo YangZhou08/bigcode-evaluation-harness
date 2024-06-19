@@ -4,8 +4,6 @@ accelerate launch --num_processes 8 main.py \
   --do_sample False \
   --n_samples 1 \
   --batch_size 1 \
-  --check \
-  --cats \
   --max_length_generation 512 \
   --allow_code_execution
 
