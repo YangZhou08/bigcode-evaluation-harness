@@ -6,6 +6,8 @@ accelerate launch --num_processes 4 main.py \
   --batch_size 1 \
   --max_length_generation 512 \
   --enable_epatches \
+  --check \
+  --griffin \
   --allow_code_execution
 
 # accelerate launch --num_processes 4 main.py \
