@@ -10,3 +10,4 @@ huggingface_hub>=0.11.1
 fsspec<2023.10.0
 tabulate
 termcolor
+huggingface_hub
