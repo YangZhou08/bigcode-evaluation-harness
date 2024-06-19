@@ -363,6 +363,8 @@ def main():
             model.config.thr = args.thr 
             if "Llama-3-8B-Instruct" in args.model: 
                 model.config.enable_epatches = args.enable_epatches 
+            else: 
+                model.config.enable_epatches = False 
             
             if args.griffin: 
                 model = get_llama_griffin2(model, schedule_k) 
