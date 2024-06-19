@@ -1,4 +1,4 @@
-accelerate launch --num_processes 1 main.py \
+accelerate launch --num_processes 8 main.py \
   --model meta-llama/Meta-Llama-3-8B-Instruct \
   --tasks humaneval \
   --do_sample False \
@@ -6,7 +6,7 @@ accelerate launch --num_processes 1 main.py \
   --batch_size 1 \
   --check \
   --cats \
-  --max_length_generation 2048 \
+  --max_length_generation 512 \
   --allow_code_execution
 
 # accelerate launch --num_processes 4 main.py \
