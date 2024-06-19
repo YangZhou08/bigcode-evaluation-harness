@@ -1,4 +1,4 @@
-accelerate launch --num_processes 8 main.py \
+accelerate launch --num_processes 4 main.py \
   --model meta-llama/Meta-Llama-3-8B-Instruct \
   --tasks humaneval \
   --do_sample False \
