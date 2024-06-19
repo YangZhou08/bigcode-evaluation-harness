@@ -1412,6 +1412,7 @@ class LlamaForCausalLM(LlamaPreTrainedModel):
             if eos_token_id_tensor is not None:
                 print("next_tokens {}".format(next_tokens)) 
                 print("eos_token_id_tensor {}".format(eos_token_id_tensor)) 
+                print("{}".format(self.tokenizer.decode(eos_token_id_tensor))) 
                 if next_tokens.eq(eos_token_id_tensor): 
                     print(colored("\nfound eos token {}".format(next_tokens), "yellow"), flush = True) 
                 unfinished_sequences = unfinished_sequences.mul(
