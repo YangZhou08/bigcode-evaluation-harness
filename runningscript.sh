@@ -1,6 +1,6 @@
 accelerate launch --num_processes 1 main.py \
   --model meta-llama/Meta-Llama-3-8B-Instruct \
-  --tasks mbpp \
+  --tasks humaneval \
   --do_sample False \
   --n_samples 1 \
   --batch_size 1 \
