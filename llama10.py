@@ -857,7 +857,7 @@ class LlamaForCausalLM(LlamaPreTrainedModel):
         self.totalgenerationlength = 0 
         self.total_roll_back_length_error = 0 
         self.errorinstance = 0 
-        self.verbose = True # manually set to false during measurement 
+        self.verbose = False # manually set to false during measurement 
         
         # for bug debugging investigation only 
         from transformers import AutoTokenizer 
