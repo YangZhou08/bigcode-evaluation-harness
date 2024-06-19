@@ -1410,10 +1410,7 @@ class LlamaForCausalLM(LlamaPreTrainedModel):
             
             # if eos_token was found in one sentence, set sentence to finished
             if eos_token_id_tensor is not None:
-                print("next_tokens {}".format(next_tokens)) 
-                print("eos_token_id_tensor {}".format(eos_token_id_tensor)) 
-                print("{}".format(self.tokenizer.decode(eos_token_id_tensor))) 
-                if next_tokens.eq(eos_token_id_tensor): 
+                if next_tokens.eq(eos_token_id_tensor[0]): 
                     print(colored("\nfound eos token {}".format(next_tokens), "yellow"), flush = True) 
                 unfinished_sequences = unfinished_sequences.mul(
                     next_tokens.tile(eos_token_id_tensor.shape[0], 1).ne(eos_token_id_tensor.unsqueeze(1)).prod(dim=0)
