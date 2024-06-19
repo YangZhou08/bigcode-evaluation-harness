@@ -5,6 +5,7 @@ accelerate launch --num_processes 8 main.py \
   --n_samples 1 \
   --batch_size 1 \
   --max_length_generation 512 \
+  --enable_epatches \
   --allow_code_execution
 
 # accelerate launch --num_processes 4 main.py \
