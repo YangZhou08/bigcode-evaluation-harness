@@ -1449,6 +1449,7 @@ class LlamaForCausalLM(LlamaPreTrainedModel):
                 if approve_quit or (not self.config.check): 
                     break 
         
+        print("the sequence is finished with {} which is {}".format(next_tokens, self.tokenizer.decode(next_tokens)), flush = True) 
         if self.config.griffin: 
             self.reset_states() 
         track_position_ids = None 
