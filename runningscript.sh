@@ -1,4 +1,4 @@
-accelerate launch --num_processes 4 main.py \
+accelerate launch --num_processes 2 main.py \
   --model meta-llama/Meta-Llama-3-8B-Instruct \
   --limit 50 \
   --tasks humaneval \
