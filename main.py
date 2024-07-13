@@ -384,7 +384,7 @@ def main():
             model.config.kernel_size = args.kernelsize 
             model.config.T = 0.6 
             model.config.thr = args.thr 
-            model.config.treewidth = args.treewidth 
+            model.config.treewidth = args.widthtree 
             model.config.filteractiveenabled = args.filteractiveenabled 
             
             if "Llama-3-8B-Instruct" in args.model: 
