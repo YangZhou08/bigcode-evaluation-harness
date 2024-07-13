@@ -250,6 +250,21 @@ def parse_args():
         default = False, 
         action = "store_true", 
     ) 
+    parser.add_argument(
+        "--widthtree", 
+        default = 8, 
+        type = int, 
+    ) 
+    parser.add_argument(
+        "--patternstrict", 
+        default = False, 
+        action = "store_true", 
+    ) 
+    parser.add_argument(
+        "--filteractiveenabled", 
+        default = False, 
+        action = "store_true", 
+    )
     # parser.add_argument( 
     #     "--do_sample", 
     #     default = True, 
@@ -369,6 +384,9 @@ def main():
             model.config.kernel_size = args.kernelsize 
             model.config.T = 0.6 
             model.config.thr = args.thr 
+            model.config.treewidth = args.treewidth 
+            model.config.filteractiveenabled = args.filteractiveenabled 
+            
             if "Llama-3-8B-Instruct" in args.model: 
                 model.config.enable_epatches = args.enable_epatches 
             else: 
