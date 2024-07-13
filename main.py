@@ -351,9 +351,9 @@ def main():
             #     **model_kwargs, 
             # ) 
             if args.check: 
-                model = LlamaForCausalLM.from_pretrained(args.model, device_map = args.device, torch_dtype = torch.bfloat16) 
+                model = LlamaForCausalLM.from_pretrained(args.model, device_map = "cuda:{}".format(accelerator.process_index), torch_dtype = torch.bfloat16) 
             else: 
-                model = LlamaForCausalLMNoTree.from_pretrained(args.model, device_map = args.device, torch_dtype = torch.bfloat16) 
+                model = LlamaForCausalLMNoTree.from_pretrained(args.model, device_map = "cuda:{}".format(accelerator.process_index), torch_dtype = torch.bfloat16) 
                 
             if args.griffin: 
                 # schedule_k = [spr for _ in range(self._model.config.num_hidden_layers)] 
