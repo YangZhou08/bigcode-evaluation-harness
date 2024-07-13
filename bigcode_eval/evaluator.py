@@ -117,6 +117,20 @@ class Evaluator:
             averagerollbacklengtherror = total_roll_back_length_error / errorinstance 
             headers += ["Total Roll Back Length Error", "Error Instance", "Average Roll Back Length Error"] 
             data += [total_roll_back_length_error, errorinstance, averagerollbacklengtherror] 
+            
+            # tree size statistics 
+            # totaltreesize = self._model.flattentreesize 
+            totaltreesize = self.model.flattentreesize 
+            # draftingtreesize = self._model.averagedraftingbatchsize 
+            draftingtreesize = self.model.averagedraftingbatchsize 
+            # totaltreesize = torch.tensor([totaltreesize, draftingtreesize], device = self.device, dtype = torch.float) 
+            totaltreesize = torch.tensor([totaltreesize, draftingtreesize], device = self.model.device, dtype = torch.float) 
+            dist.all_reduce(totaltreesize, op = dist.ReduceOp.SUM) 
+            draftingtreesize = totaltreesize[1].item() 
+            totaltreesize = totaltreesize[0].item() 
+            headers += ["Effective Tree Size", "Drafting Tree Size"] 
+            data += [totaltreesize/num_step, draftingtreesize/num_step] 
+            
         if self.accelerator.is_main_process: 
             print(tabulate([data], headers=headers, tablefmt="grid")) 
         # self._model.updatestatistic() 

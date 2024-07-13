@@ -18,7 +18,10 @@ from bigcode_eval.arguments import EvalArguments
 from bigcode_eval.evaluator import Evaluator
 from bigcode_eval.tasks import ALL_TASKS 
 
-from llama10 import get_llama_griffin, get_llama_griffin2, LlamaForCausalLM 
+# from llama10 import get_llama_griffin, get_llama_griffin2, LlamaForCausalLM 
+from llama12addingtree import get_llama_griffin, get_llama_griffin2, LlamaForCausalLM 
+from llama12 import get_llama_griffin_no_tree, get_llama_griffin2_no_tree, LlamaForCausalLMNoTree 
+from llama12addingtree import MultiTokenEOSCriteria 
 
 
 class MultiChoice:
@@ -343,10 +346,15 @@ def main():
             #     **model_kwargs,
             # ) 
             assert not (args.griffin and args.cats), "Cannot use both griffin and cats" 
-            model = LlamaForCausalLM.from_pretrained(
-                args.model, 
-                **model_kwargs, 
-            ) 
+            # model = LlamaForCausalLM.from_pretrained(
+            #     args.model, 
+            #     **model_kwargs, 
+            # ) 
+            if args.check: 
+                model = LlamaForCausalLM.from_pretrained(args.model, device_map = args.device, torch_dtype = torch.bfloat16) 
+            else: 
+                model = LlamaForCausalLMNoTree.from_pretrained(args.model, device_map = args.device, torch_dtype = torch.bfloat16) 
+                
             if args.griffin: 
                 # schedule_k = [spr for _ in range(self._model.config.num_hidden_layers)] 
                 schedule_k = [args.spr for _ in range(model.config.num_hidden_layers)] 
@@ -366,10 +374,18 @@ def main():
             else: 
                 model.config.enable_epatches = False 
             
-            if args.griffin: 
-                model = get_llama_griffin2(model, schedule_k) 
-            if args.cats: 
-                model = get_llama_griffin(model, schedule_k) 
+            if args.check: 
+                if args.griffin: 
+                    model = get_llama_griffin2(model, schedule_k) 
+                if args.cats: 
+                    model = get_llama_griffin(model, schedule_k, patternstrict = args.patternstrict) 
+                    # model = get_llama_griffin(model, schedule_k, patternstrict = args.patternstrict) 
+            else: 
+                if args.griffin: 
+                    model = get_llama_griffin2_no_tree(model, schedule_k) 
+                if args.cats: 
+                    model = get_llama_griffin_no_tree(model, schedule_k) 
+                    # model = get_llama_griffin(model, schedule_k, patternstrict = args.patternstrict) 
             
         elif args.modeltype == "seq2seq":
             warnings.warn(
