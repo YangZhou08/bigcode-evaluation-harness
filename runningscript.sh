@@ -1,4 +1,4 @@
-accelerate launch --num_processes 8 main.py \
+accelerate launch --num_processes 1 main.py \
   --model meta-llama/Meta-Llama-3-8B-Instruct \
   --tasks mbppplus \
   --do_sample False \
@@ -8,7 +8,7 @@ accelerate launch --num_processes 8 main.py \
   --enable_epatches \
   --allow_code_execution
 
-accelerate launch --num_processes 8 main.py \
+accelerate launch --num_processes 1 main.py \
   --model meta-llama/Meta-Llama-3-8B-Instruct \
   --tasks mbppplus \
   --do_sample False \
@@ -19,7 +19,7 @@ accelerate launch --num_processes 8 main.py \
   --griffin \
   --allow_code_execution
 
-accelerate launch --num_processes 8 main.py \
+accelerate launch --num_processes 1 main.py \
   --model meta-llama/Meta-Llama-3-8B-Instruct \
   --tasks mbppplus \
   --do_sample False \
