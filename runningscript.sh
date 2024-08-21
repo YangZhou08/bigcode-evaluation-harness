@@ -1,4 +1,4 @@
-accelerate launch --num_processes 10 main.py \
+accelerate launch --num_processes 4 main.py \
   --model meta-llama/Meta-Llama-3-8B-Instruct \
   --tasks humaneval \
   --do_sample False \
@@ -8,10 +8,10 @@ accelerate launch --num_processes 10 main.py \
   --enable_epatches \
   --allow_code_execution \
 
-sparsity = (0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9) 
-for s in ${sparsity[@]}; 
+sparsity=(0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9)
+for s in ${sparsity[@]};
 do
-accelerate launch --num_processes 10 main.py \
+accelerate launch --num_processes 4 main.py \
   --model meta-llama/Meta-Llama-3-8B-Instruct \
   --tasks humaneval \
   --do_sample False \
@@ -21,9 +21,9 @@ accelerate launch --num_processes 10 main.py \
   --enable_epatches \
   --griffin \
   --allow_code_execution \
-  --spr ${s} 
+  --spr ${s}
 
-accelerate launch --num_processes 10 main.py \
+accelerate launch --num_processes 4 main.py \
   --model meta-llama/Meta-Llama-3-8B-Instruct \
   --tasks humaneval \
   --do_sample False \
@@ -33,9 +33,9 @@ accelerate launch --num_processes 10 main.py \
   --enable_epatches \
   --cats \
   --allow_code_execution \
-  --spr ${s} 
+  --spr ${s}
 
-done 
+done
 
 # accelerate launch --num_processes 4 main.py \
 #   --model meta-llama/Meta-Llama-3-8B \
