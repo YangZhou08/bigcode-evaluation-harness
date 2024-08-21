@@ -31,7 +31,6 @@ accelerate launch --num_processes 10 main.py \
   --batch_size 1 \
   --max_length_generation 512 \
   --enable_epatches \
-  --check \
   --cats \
   --allow_code_execution \
   --spr ${s} 
