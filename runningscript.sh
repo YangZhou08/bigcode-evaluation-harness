@@ -7,7 +7,6 @@ accelerate launch --num_processes 10 main.py \
   --max_length_generation 512 \
   --enable_epatches \
   --allow_code_execution \
-  --limit 0.3 
 
 accelerate launch --num_processes 10 main.py \
   --model meta-llama/Meta-Llama-3-8B-Instruct \
@@ -19,7 +18,6 @@ accelerate launch --num_processes 10 main.py \
   --enable_epatches \
   --griffin \
   --allow_code_execution \
-  --limit 0.3 
 
 accelerate launch --num_processes 10 main.py \
   --model meta-llama/Meta-Llama-3-8B-Instruct \
@@ -32,7 +30,6 @@ accelerate launch --num_processes 10 main.py \
   --check \
   --cats \
   --allow_code_execution \
-  --limit 0.3 
 
 # accelerate launch --num_processes 4 main.py \
 #   --model meta-llama/Meta-Llama-3-8B \
