@@ -1,4 +1,4 @@
-accelerate launch --num_processes 1 main.py \
+accelerate launch --num_processes 8 main.py \
   --model meta-llama/Llama-2-7b-chat-hf \
   --tasks mbppplus \
   --do_sample False \
