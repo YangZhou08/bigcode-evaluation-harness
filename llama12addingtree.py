@@ -1049,7 +1049,7 @@ class LlamaForCausalLM(LlamaPreTrainedModel):
         
         # for bug debugging investigation only 
         from transformers import AutoTokenizer 
-        self.tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B") 
+        self.tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-chat-hf") 
         if self.verbose: 
             assert self.tokenizer is not None 
         # Initialize weights and apply final processing
