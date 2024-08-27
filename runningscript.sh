@@ -14,8 +14,8 @@ accelerate launch --num_processes 8 main.py \
   --spr 0.5 \
   --widthtree $treesize \
   --check \
-  --kernelsize 12 \
-  --thr 0.05 \
+  --kernelsize 16 \
+  --thr 0.1 \
 
 done 
 # accelerate launch --num_processes 4 main.py \
