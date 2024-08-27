@@ -11,7 +11,8 @@ accelerate launch --num_processes 1 main.py \
   --spr 0.5 \
   --widthtree 1 \
   --check \
-  --kernelsize 16 \
+  --kernelsize 12 \
+  --thr 0.05 \
 
 # accelerate launch --num_processes 4 main.py \
 #   --model meta-llama/Meta-Llama-3-8B \
