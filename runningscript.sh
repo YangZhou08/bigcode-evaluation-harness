@@ -1,3 +1,6 @@
+treesizes=(4 6 8)
+for treesize in ${treesizes[@]} 
+do 
 accelerate launch --num_processes 8 main.py \
   --model meta-llama/Llama-2-7b-chat-hf \
   --tasks mbppplus \
@@ -9,11 +12,12 @@ accelerate launch --num_processes 8 main.py \
   --griffin \
   --allow_code_execution \
   --spr 0.5 \
-  --widthtree 1 \
+  --widthtree $treesize \
   --check \
   --kernelsize 12 \
   --thr 0.05 \
 
+done 
 # accelerate launch --num_processes 4 main.py \
 #   --model meta-llama/Meta-Llama-3-8B \
 #   --limit 50 \
