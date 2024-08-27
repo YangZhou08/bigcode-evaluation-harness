@@ -2,8 +2,8 @@ treesizes=(1 4 6 8)
 for treesize in ${treesizes[@]} 
 do 
 accelerate launch --num_processes 8 main.py \
-  --model meta-llama/Meta-Llama-3-8B \
-  --tasks humaneval \
+  --model meta-llama/Llama-2-7b-hf \
+  --tasks mbppplus \
   --do_sample False \
   --n_samples 1 \
   --batch_size 1 \
@@ -15,7 +15,7 @@ accelerate launch --num_processes 8 main.py \
   --widthtree $treesize \
   --check \
   --kernelsize 16 \
-  --thr 0.1 \
+  --thr 0.05 \
 
 done 
 # accelerate launch --num_processes 4 main.py \
