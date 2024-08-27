@@ -8,7 +8,7 @@ accelerate launch --num_processes 8 main.py \
   --enable_epatches \
   --griffin \
   --allow_code_execution \
-  --spr ${s} \
+  --spr 0.5 \
   --widthtree 1 \
 
 # accelerate launch --num_processes 4 main.py \
