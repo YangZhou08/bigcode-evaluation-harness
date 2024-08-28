@@ -85,6 +85,7 @@ accelerate launch --num_processes 4 main.py \
   --check \
   --kernelsize 12 \
   --thr 0.05 \
+  --limit 100 \
 
 done 
 
