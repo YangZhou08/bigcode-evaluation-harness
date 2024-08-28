@@ -70,7 +70,7 @@ do
 #   --kernelsize 16 \
 #   --thr 0.05 \
 
-accelerate launch --num_processes 8 main.py \
+accelerate launch --num_processes 4 main.py \
   --model meta-llama/Llama-2-13b-chat-hf \
   --tasks humaneval \
   --do_sample False \
