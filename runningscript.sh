@@ -71,7 +71,7 @@ do
 #   --thr 0.05 \
 
 accelerate launch --num_processes 8 main.py \
-  --model meta-llama/Llama-2-7b-chat-hf \
+  --model meta-llama/Llama-2-13b-chat-hf \
   --tasks humaneval \
   --do_sample False \
   --n_samples 1 \
@@ -81,10 +81,10 @@ accelerate launch --num_processes 8 main.py \
   --griffin \
   --allow_code_execution \
   --spr 0.5 \
-  --widthtree $treesize \
+  --widthtree 8 \
   --check \
   --kernelsize 12 \
-  --thr 0.05 \
+  --thr 0.1 \
 
 done 
 
