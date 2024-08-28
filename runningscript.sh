@@ -84,7 +84,7 @@ accelerate launch --num_processes 4 main.py \
   --widthtree 8 \
   --check \
   --kernelsize 12 \
-  --thr 0.1 \
+  --thr 0.05 \
 
 done 
 
