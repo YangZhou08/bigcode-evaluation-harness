@@ -71,7 +71,7 @@ do
 #   --thr 0.05 \
 
 accelerate launch --num_processes 4 main.py \
-  --model meta-llama/Llama-2-13b-hf \
+  --model meta-llama/Llama-2-13b-chat-hf \
   --tasks mbppplus \
   --do_sample False \
   --n_samples 1 \
