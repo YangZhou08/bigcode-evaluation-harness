@@ -14,12 +14,12 @@
 #   --kernelsize 12 \
 #   --thr 0.05 \
 
-treesizes=(4 6 8)
+treesizes=(8) 
 for treesize in ${treesizes[@]} 
 do 
 accelerate launch --num_processes 8 main.py \
   --model meta-llama/Llama-2-7b-hf \
-  --tasks mbppplus \
+  --tasks humaneval \
   --do_sample False \
   --n_samples 1 \
   --batch_size 1 \
