@@ -113,6 +113,7 @@ accelerate launch --num_processes 3 main.py \
   --check \
   --kernelsize 16 \
   --thr 0.05 \
+  --limit 100 \
 
 done 
 
