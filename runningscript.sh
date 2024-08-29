@@ -84,7 +84,7 @@ do
 #   --limit 100 \
 
 accelerate launch --num_processes 8 main.py \
-  --model meta-llama/Meta-Llama-3-8B \
+  --model meta-llama/Meta-Llama-3-8B-Instruct \
   --tasks mbppplus \
   --do_sample False \
   --n_samples 1 \
@@ -97,7 +97,7 @@ accelerate launch --num_processes 8 main.py \
   --widthtree $treesize \
   --check \
   --kernelsize 16 \
-  --thr 0.1 \
+  --thr 0.05 \
 
 # accelerate launch --num_processes 3 main.py \
 #   --model meta-llama/Meta-Llama-3-8B-Instruct \
