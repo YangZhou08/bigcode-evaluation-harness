@@ -51,7 +51,7 @@
 
 # done 
 
-treesizes=(8) 
+treesizes=(1 4 6) 
 for treesize in ${treesizes[@]} 
 do 
 # accelerate launch --num_processes 8 main.py \
@@ -83,23 +83,8 @@ do
 #   --kernelsize 12 \
 #   --limit 100 \
 
-# accelerate launch --num_processes 4 main.py \
-#   --model meta-llama/Llama-2-13b-hf \
-#   --tasks mbppplus \
-#   --do_sample False \
-#   --n_samples 1 \
-#   --batch_size 1 \
-#   --max_length_generation 512 \
-#   --enable_epatches \
-#   --griffin \
-#   --allow_code_execution \
-#   --spr 0.5 \
-#   --kernelsize 12 \
-#   --thr 0.01 \
-#   --limit 100 \
-
-accelerate launch --num_processes 6 main.py \
-  --model meta-llama/Meta-Llama-3-8B \
+accelerate launch --num_processes 4 main.py \
+  --model meta-llama/Llama-2-13b-hf \
   --tasks mbppplus \
   --do_sample False \
   --n_samples 1 \
@@ -109,10 +94,26 @@ accelerate launch --num_processes 6 main.py \
   --griffin \
   --allow_code_execution \
   --spr 0.5 \
-  --widthtree $treesize \
   --check \
   --kernelsize 16 \
   --thr 0.05 \
+  --limit 100 \
+
+# accelerate launch --num_processes 6 main.py \
+#   --model meta-llama/Meta-Llama-3-8B \
+#   --tasks mbppplus \
+#   --do_sample False \
+#   --n_samples 1 \
+#   --batch_size 1 \
+#   --max_length_generation 512 \
+#   --enable_epatches \
+#   --griffin \
+#   --allow_code_execution \
+#   --spr 0.5 \
+#   --widthtree $treesize \
+#   --check \
+#   --kernelsize 16 \
+#   --thr 0.05 \
 
 done 
 
