@@ -91,7 +91,7 @@ accelerate launch --num_processes 4 main.py \
   --batch_size 1 \
   --max_length_generation 512 \
   --enable_epatches \
-  --griffin \
+  --cats \
   --allow_code_execution \
   --spr 0.5 \
   --widthtree $treesize \
