@@ -437,6 +437,9 @@ def main():
             )
         else:
             # used by default for most models
+            print(args.revision) 
+            print(args.trust_remote_code) 
+            print(args.use_auth_token) 
             tokenizer = AutoTokenizer.from_pretrained(
                 args.model,
                 revision=args.revision,
