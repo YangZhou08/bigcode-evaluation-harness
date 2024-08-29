@@ -112,8 +112,7 @@ accelerate launch --num_processes 6 main.py \
   --widthtree $treesize \
   --check \
   --kernelsize 16 \
-  --thr 0.01 \
-  --limit 100 \
+  --thr 0.05 \
 
 done 
 
