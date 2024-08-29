@@ -98,6 +98,7 @@ accelerate launch --num_processes 4 main.py \
   --check \
   --kernelsize 16 \
   --thr 0.05 \
+  --limit 100 \
 
 # accelerate launch --num_processes 3 main.py \
 #   --model meta-llama/Meta-Llama-3-8B-Instruct \
