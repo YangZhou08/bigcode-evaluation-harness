@@ -83,23 +83,8 @@ do
 #   --kernelsize 12 \
 #   --limit 100 \
 
-# accelerate launch --num_processes 3 main.py \
-#   --model meta-llama/Llama-2-13b-hf \
-#   --tasks mbppplus \
-#   --do_sample False \
-#   --n_samples 1 \
-#   --batch_size 1 \
-#   --max_length_generation 512 \
-#   --enable_epatches \
-#   --griffin \
-#   --allow_code_execution \
-#   --spr 0.5 \
-#   --check \
-#   --kernelsize 16 \
-#   --thr 0.05 \
-
 accelerate launch --num_processes 3 main.py \
-  --model meta-llama/Meta-Llama-3-8B \
+  --model meta-llama/Llama-2-13b-hf \
   --tasks mbppplus \
   --do_sample False \
   --n_samples 1 \
@@ -113,6 +98,22 @@ accelerate launch --num_processes 3 main.py \
   --check \
   --kernelsize 16 \
   --thr 0.05 \
+
+# accelerate launch --num_processes 3 main.py \
+#   --model meta-llama/Meta-Llama-3-8B \
+#   --tasks mbppplus \
+#   --do_sample False \
+#   --n_samples 1 \
+#   --batch_size 1 \
+#   --max_length_generation 512 \
+#   --enable_epatches \
+#   --griffin \
+#   --allow_code_execution \
+#   --spr 0.5 \
+#   --widthtree $treesize \
+#   --check \
+#   --kernelsize 16 \
+#   --thr 0.05 \
 
 done 
 
