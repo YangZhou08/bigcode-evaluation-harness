@@ -51,7 +51,7 @@
 
 # done 
 
-treesizes=(1 4 6) 
+treesizes=(8) 
 for treesize in ${treesizes[@]} 
 do 
 # accelerate launch --num_processes 8 main.py \
@@ -98,7 +98,7 @@ do
 #   --kernelsize 16 \
 #   --thr 0.05 \
 
-accelerate launch --num_processes 6 main.py \
+accelerate launch --num_processes 3 main.py \
   --model meta-llama/Meta-Llama-3-8B \
   --tasks mbppplus \
   --do_sample False \
