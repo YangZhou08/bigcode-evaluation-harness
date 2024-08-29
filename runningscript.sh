@@ -51,7 +51,7 @@
 
 # done 
 
-treesizes=(1 4 6) 
+treesizes=(8) 
 for treesize in ${treesizes[@]} 
 do 
 # accelerate launch --num_processes 8 main.py \
