@@ -98,7 +98,7 @@ do
 #   --thr 0.01 \
 #   --limit 100 \
 
-accelerate launch --num_processes 4 main.py \
+accelerate launch --num_processes 6 main.py \
   --model meta-llama/Meta-Llama-3-8B \
   --tasks mbppplus \
   --do_sample False \
